@@ -1,0 +1,74 @@
+<table>
+    <thead>
+        <tr>
+            <th></th>
+            <th>列車進入月台車站之站名</th>
+            <th>行駛目的地</th>
+            <th>資料更新日期</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of list;index as i">
+            <td>{{i + 1}}</td>
+            <td>{{item.Station}}</td>
+            <td>{{item.Destination}}</td>
+            <td>{{item.UpdateTime | date : 'yyyy-MM-dd HH:mm:ss'}}</td>
+        </tr>
+    </tbody>
+</table>
+<hr>
+<a id="power-boost-calc"></a>
+<app-power-boost-calculator>loading</app-power-boost-calculator>
+
+<hr>
+<a id="Interleaved"></a>
+<app-Interleaved>loading</app-Interleaved>
+<hr>
+<p *appUnless="condition" class="unless a">
+  (A) This paragraph is displayed because the condition is false.
+</p>
+
+<p *appUnless="!condition" class="unless b">
+  (B) Although the condition is true,
+  this paragraph is displayed because appUnless is set to false.
+</p>
+
+<p>
+  The condition is currently
+  <span [ngClass]="{ 'a': !condition, 'b': condition, 'unless': true }">{{condition}}</span>.
+  <button
+    (click)="condition = !condition"
+    [ngClass] = "{ 'a': condition, 'b': !condition }" >
+    Toggle condition to {{condition ? 'false' : 'true'}}
+  </button>
+</p>
+
+<hr>
+<p [appHighlight]="color">Highlight me!</p>
+
+
+<hr>
+<h1>My First Attribute Directive</h1>
+
+<h2>Pick a highlight color</h2>
+
+<div>
+  <input type="radio" name="colors" (click)="color = 'lightgreen'">Green
+  <input type="radio" name="colors" (click)="color = 'yellow'">Yellow
+  <input type="radio" name="colors" (click)="color = 'cyan'">Cyan
+</div>
+<p [appHighlight] = "color">Highlight me!</p>
+
+<p [appHighlight]="color" defaultColor="violet">
+  Highlight me too
+</p>
+
+<hr>
+<p>Use ngNonBindable to stop evaluation.</p>
+<p ngNonBindable>This should not evaluate: {{ 1 + 1 }}</p>
+
+<h3>ngNonBindable with a directive</h3>
+<div ngNonBindable [appHighlight]="'yellow'">This should not evaluate: {{ 1 +1 }}, but will highlight yellow.
+</div>
+
+<router-outlet></router-outlet>
